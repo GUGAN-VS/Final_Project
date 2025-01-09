@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Caretaker Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>BP Records for Patient ID: {{ patient_id }}</h1>
+        {% if messages %}
+            <div class="alert-container">
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Systolic</th>
+                    <th>Diastolic</th>
+                    <th>Recorded At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record.systolic }}</td>
+                    <td>{{ record.diastolic }}</td>
+                    <td>{{ record.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{% url 'logout' %}"><button class="btn btn-warning">Log Out</button></a>
+</body>
+</html>
